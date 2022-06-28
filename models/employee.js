@@ -55,7 +55,11 @@ class EmployeeUtility {
   async deleteEmployee() {
     console.log("-----------------".red);
     console.log("Activating DELETE EMPLOYEE".red);
-    const users = await Employees.findAll()
+    const users = await Employees.findAll({
+      where: {
+        id: 10
+      }
+    })
     const employeeArray = []
     for (const employee of users) {
       employeeArray.push(employee.dataValues);
@@ -67,20 +71,34 @@ class EmployeeUtility {
 
   // This will add a new employee to the database. 
   addEmployee() {
+    //TODO: Switch this out with real array from database
     const roleArray = ["Software Developer", "Accountant", "Lead Engineer", "Sales", "Operator", "CSR", "Clerical staff", "HR manager"]
 
     console.log("-----------------");
-    console.log("Activating ADD EMPLOYEE");
+    console.log("ADD EMPLOYEE");
+    // Inquirer for adding employee
     inquirer.prompt([
       {
         type: 'input',
         name: 'e.first_name',
-        message: "What is the Employee's first name?"
+        message: "What is the Employee's first name?",
+        validate(answer) {
+          if (!answer) {
+            return "Please Enter a valid name!";
+          }
+          return true;
+        },
       },
       {
         type: 'input',
         name: 'e.last_name',
-        message: "What is the Employee's last name?"
+        message: "What is the Employee's last name?",
+        validate(answer) {
+          if (!answer) {
+            return "Please Enter a valid name!";
+          }
+          return true;
+        },
       },
       {
         type: 'list',
@@ -89,6 +107,7 @@ class EmployeeUtility {
         choices: roleArray
       },
     ])
+      // Add new Employee to database
       .then(res => {
         console.log(res.e.first_name);
         const empAdded = Employees.create(
@@ -98,8 +117,12 @@ class EmployeeUtility {
             role_id: 2
           }
         );
-        console.log(`${res.e.first_name}'s auto-generated ID:`, empAdded.id);
-        console.log(`${res.e.first_name} has been added`)
+        return empAdded
+      })
+      // Display added employee and full list
+      .then(employee => {
+        console.log(`${employee.first_name} ${employee.last_name} has been added. ID:${employee.id}`)
+        this.viewEmployees();
       });
   }
 }

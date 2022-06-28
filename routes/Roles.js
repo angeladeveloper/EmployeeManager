@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Roles = require('../models/roles.js');
+const { Roles } = require('../models/roles.js');
 
 
 // GET  one role

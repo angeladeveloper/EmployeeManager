@@ -1,8 +1,8 @@
 var inquirer = require("inquirer");
 var colors = require('colors');
-const { Employee, EmployeeUtility } = require('./models/employee.js')
-const { Departments,
-  DepartmentUtility, } = require('./models/departments.js')
+const { Employees, EmployeeUtility } = require('./models/employee.js')
+const { Departments, DepartmentUtility, } = require('./models/departments.js');
+const { Roles, RolesUtility, } = require('./models/roles.js');
 // const sequelize = require('./config/connection');
 
 
@@ -24,7 +24,7 @@ function startProgram() {
       type: "list",
       name: "main",
       message: "What would you like to do?",
-      choices: ["View All Employees", "Add Employee", "Delete Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Departments", "Delete Department"],
+      choices: ["View All Employees", "Add Employee", "Delete Employee", "Update Employee Role", "View All Roles", "Add Role", "Delete Role", "View All Departments", "Add Departments", "Delete Department"],
       default: "View All Employees",
 
     },
@@ -39,6 +39,7 @@ function startProgram() {
 function taskRouter(task) {
   const e_utility = new EmployeeUtility();
   const d_utility = new DepartmentUtility();
+  const r_utility = new RolesUtility;
   switch (task) {
     case "View All Employees":
       e_utility.viewEmployees();
@@ -48,7 +49,7 @@ function taskRouter(task) {
     case "Add Employee":
       e_utility.addEmployee();
       console.log("Add Employee".green)
-      startProgram()
+      // startProgram()
       break;
     case "Delete Employee":
       e_utility.deleteEmployee();
@@ -59,9 +60,15 @@ function taskRouter(task) {
       console.log("Update Employee Role".blue)
       break;
     case "View All Roles":
+      r_utility.viewRoles()
       console.log("View All Roles".blue)
       break;
+    case "Delete Role":
+      r_utility.deleteRole();
+      console.log("Add Role".green)
+      break;
     case "Add Role":
+      r_utility.addRole();
       console.log("Add Role".green)
       break;
     case "View All Departments":
