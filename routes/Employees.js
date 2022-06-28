@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Employee = require('../models/employee.js')
+const { Employee } = require('../models/employee.js')
 
 
 router.get('/:employee_id', (req, res) => {

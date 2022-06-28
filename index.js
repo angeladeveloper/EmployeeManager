@@ -1,5 +1,8 @@
 var inquirer = require("inquirer");
 var colors = require('colors');
+const { Employee, EmployeeUtility } = require('./models/employee.js')
+const { Departments,
+  DepartmentUtility, } = require('./models/departments.js')
 // const sequelize = require('./config/connection');
 
 
@@ -21,7 +24,7 @@ function startProgram() {
       type: "list",
       name: "main",
       message: "What would you like to do?",
-      choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Departments"],
+      choices: ["View All Employees", "Add Employee", "Delete Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Departments", "Delete Department"],
       default: "View All Employees",
 
     },
@@ -34,12 +37,23 @@ function startProgram() {
 }
 
 function taskRouter(task) {
+  const e_utility = new EmployeeUtility();
+  const d_utility = new DepartmentUtility();
   switch (task) {
     case "View All Employees":
-      console.log("View All Employees".blue)
+      e_utility.viewEmployees();
+      startProgram();
+      // console.log("View All Employees".blue)
       break;
     case "Add Employee":
+      e_utility.addEmployee();
       console.log("Add Employee".green)
+      startProgram()
+      break;
+    case "Delete Employee":
+      e_utility.deleteEmployee();
+      // console.log("Delete Employee".red)
+      startProgram()
       break;
     case "Update Employee Role":
       console.log("Update Employee Role".blue)
@@ -51,10 +65,19 @@ function taskRouter(task) {
       console.log("Add Role".green)
       break;
     case "View All Departments":
+      d_utility.viewDepartments();
       console.log("View All Departments".blue)
+      startProgram()
       break;
     case "Add Departments":
+      d_utility.addDepartment();
       console.log("Add Departments".green)
+      startProgram()
+      break;
+    case "Delete Department":
+      d_utility.deleteDepartment();
+      startProgram()
+      // console.log("Add Departments".green)
       break;
 
     default:
