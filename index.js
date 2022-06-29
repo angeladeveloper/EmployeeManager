@@ -39,7 +39,7 @@ function startProgram() {
 function taskRouter(task) {
   const e_utility = new EmployeeUtility();
   const d_utility = new DepartmentUtility();
-  const r_utility = new RolesUtility;
+  const r_utility = new RolesUtility();
   switch (task) {
     case "View All Employees":
       e_utility.viewEmployees();

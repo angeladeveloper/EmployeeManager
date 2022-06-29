@@ -41,6 +41,21 @@ class RolesUtility {
 
   }
 
+
+  async currentRoleArray() {
+    const roles = await Roles.findAll()
+    const rolesArray = []
+    for (const role of roles) {
+      const roleTitle = role.dataValues.title;
+      const roleId = role.dataValues.id;
+      const roleObject = { value: roleId, name: roleTitle, short: '' }
+      rolesArray.push(roleObject);
+      // rolesArray.push(role.dataValues);
+    }
+    console.log(rolesArray)
+    return rolesArray
+  }
+
   async viewRoles() {
     console.log("-----------------".green);
     console.log("Activating DELETE ROLES".green);

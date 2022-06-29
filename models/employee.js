@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const { Roles, RolesUtility, } = require('./roles.js');
 
 class Employees extends Model { }
 
@@ -74,10 +75,12 @@ class EmployeeUtility {
   }
 
   // This will add a new employee to the database. 
-  addEmployee() {
-    //TODO: Switch this out with real array from database
-    const roleArray = ["Software Developer", "Accountant", "Lead Engineer", "Sales", "Operator", "CSR", "Clerical staff", "HR manager"]
+  async addEmployee() {
+    // Queriers Database to get real time roles
 
+    const r_utility = new RolesUtility();
+
+    const roleArray = await r_utility.currentRoleArray();
     console.log("-----------------");
     console.log("ADD EMPLOYEE");
     // Inquirer for adding employee
@@ -106,7 +109,7 @@ class EmployeeUtility {
       },
       {
         type: 'list',
-        name: 'e.role',
+        name: 'e_role',
         message: "What is the Employee's role?",
         choices: roleArray
       },
@@ -118,7 +121,7 @@ class EmployeeUtility {
           {
             first_name: res.e.first_name,
             last_name: res.e.last_name,
-            role_id: 2
+            role_id: res.e_role
           }
         );
         return empAdded
