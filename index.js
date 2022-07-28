@@ -1,10 +1,15 @@
 var inquirer = require("inquirer");
 var colors = require('colors');
-const { Employees, EmployeeUtility } = require('./models/employee.js')
-const { Departments, DepartmentUtility, } = require('./models/departments.js');
-const { Roles, RolesUtility, } = require('./models/roles.js');
+const { Roles, Employees, Departments } = require('./models/index')
+
+
+const { EmployeeUtility, RolesUtility, DepartmentUtility } = require('./queries/index')
+// const { EmployeeUtility,  } = require('./queries/Employee');
+// const { DepartmentUtility } = require('./queries/Departments');
+// const { RolesUtility } = require('./queries/Roles');
 // const sequelize = require('./config/connection');
 
+console.dir(RolesUtility)
 
 function startProgram() {
   console.log(`                                     
@@ -74,16 +79,13 @@ function taskRouter(task) {
     case "View All Departments":
       d_utility.viewDepartments();
       console.log("View All Departments".blue)
-      startProgram()
       break;
     case "Add Departments":
       d_utility.addDepartment();
       console.log("Add Departments".green)
-      startProgram()
       break;
     case "Delete Department":
       d_utility.deleteDepartment();
-      startProgram()
       // console.log("Add Departments".green)
       break;
 

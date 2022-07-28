@@ -16,18 +16,18 @@ VALUES ("Software Developer", 1, 100000),
        ("Clerical staff",5,70000),
        ("HR manager",3,95000);
        
-INSERT INTO employees (first_name, last_name ,role_id, is_active)
+INSERT INTO employees (first_name, last_name ,role_id, is_active, is_manager)
 VALUES
-  ("Sean","Chandler",2, true),
-  ("Gavin","Declan",2, true),
-  ("Ulysses","Jerome",3, true),
-  ("Laith","Stephen",3, true),
-  ("Reed","Rashad",1, true),
-  ("Destiny","Louis",4, true),
-  ("Amity","Calvin",1, true),
-  ("Maris","Melvin",2, true),
-  ("Uriel","Kasper",2, true),
-  ("Sean","Xander",3, true),
-  ("Hayden","Guy",1, true),
-  ("Amela","Dolan",5, true),
-  ("Sophia","Tarik",7, true);
+  ("Timon","Darryl",1,true,true),
+  ("Zena","Keiko",3,true,false),
+  ("Dai","Inez",2,true,false),
+  ("Lillian","Ila",1,true,false),
+  ("Skyler","Leila",2,true,false),
+  ("Paul","Hanae",5,true,true),
+  ("Ariana","Upton",4,true,false),
+  ("Clark","Hiram",6,true,false),
+  ("Chaim","Vincent",2,true,false),
+  ("Solomon","Dexter",2,true,true),
+  ("Ryan","Emery",4,true,false),
+  ("Ina","Victor",5,true,true),
+  ("Christian","Daniel",3,true,true);
